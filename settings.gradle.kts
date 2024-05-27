@@ -18,6 +18,9 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "Pigeon"
 include(":app")
+include(":backend")
+include(":models")
