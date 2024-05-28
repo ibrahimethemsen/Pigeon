@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
+    id("pigeon.application")
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kspPlugin)
     alias(libs.plugins.hiltPlugin)
@@ -9,16 +9,12 @@ plugins {
 
 android {
     namespace = "com.ibrahimethemsen.pigeon"
-    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.ibrahimethemsen.pigeon"
-        minSdk = 24
-        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -33,18 +29,15 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
+
     buildFeatures {
         compose = true
     }
     composeCompiler {
         enableStrongSkippingMode = true
+
+        reportsDestination = layout.buildDirectory.dir("compose_compiler")
+        stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
     }
     packaging {
         resources {
